@@ -190,3 +190,24 @@ With this API you can get the hours that the accountante system should bill for 
         },
         "message": string
     }
+
+### Report Peak Time Of Project
+
+With this API you can get peack time of a project in a specific date which most of the teammates worked.
+
+#### Request
+
+`POST http://localhost/api/reports/projects/getpeak-time`
+
+    {project_id: int, record_date: date}
+
+#### Response
+
+    {
+        "success": boolean,
+        "data": {
+            "overlap_time": time,
+            "record_count": int
+        },
+        "message": string
+    }
