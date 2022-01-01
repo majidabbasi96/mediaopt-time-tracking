@@ -165,7 +165,28 @@ Note: the columns in CSV file should be like this:
 #### Response
 
     {
-        "success": true,
+        "success": boolean,
         "data": [],
-        "message": "data has been imported."
+        "message": string
+    }
+
+### Report Project Billable Hours
+
+With this API you can get the hours that the accountante system should bill for a project.
+
+#### Request
+
+`POST http://localhost/api/reports/projects/billable-hours`
+
+    {project_id: int}
+
+#### Response
+
+    {
+        "success": boolean,
+        "data": {
+            "total_minutes": float,
+            "total_hours": string
+        },
+        "message": string
     }
