@@ -37,23 +37,33 @@ Step 4: Run the following command in order to install the composer packages with
 You can find refrence of this command on [Laravel Official Documentation](https://laravel.com/docs/8.x/sail#installing-composer-dependencies-for-existing-projects)
 
 Step 5: Run the following Command:
+
     ./vendor/bin/sail up
+
 This command will install the Laravel project dependencies based on `docker-compose.yml` file instructions in docker and run the app.
 
 Step 6: Run the following command:
+
     ./vendor/bin/sail artisan key:generate
+
 This command will generate a key for Laravel project.
 
 Step 7: Run the following command:
+
     ./vendor/bin/sail artisan migrate
+
 This command will run the database migrations on database instanceof docker.
 
 Step 8: Run the following command command:
+    
     ./vendor/bin/sail artisan db:seed --class=ProjectSeeder
+
 This command will add some sample projects.
 
 Step 9: Run the following command:
+    
     ./vendor/bin/sail artisan db:seed --class=UserSeeder
+    
 This command will add some sample users.
 
 Open browser and then go to the `http://localhost/` , you should be able to see the Laravel project runing successfully.
