@@ -63,7 +63,7 @@ This command will add some sample projects.
 Step 9: Run the following command:
     
     ./vendor/bin/sail artisan db:seed --class=UserSeeder
-    
+
 This command will add some sample users.
 
 Open browser and then go to the `http://localhost/` , you should be able to see the Laravel project runing successfully.
@@ -108,6 +108,38 @@ This this API you can log starting work.
             "updated_at": datetime,
             "created_at": datetime,
             "id": int
+        },
+        "message": string
+    }
+
+### Worklog Logout
+
+This this API you can log leaving work.
+
+#### Request
+
+`POST http://localhost/api/work-logs/logout`
+
+    {user_id: int, end_time: date}
+
+    Sample Data:
+    {user_id: 1, end_time: 11:11:11}
+
+#### Response
+
+    {
+        "success": boolean,
+        "data": {
+            "id": int,
+            "user_id": int,
+            "project_id": int,
+            "source": string,
+            "record_date": date,
+            "start_time": time,
+            "end_time": time,
+            "duration_in_minute": float,
+            "updated_at": datetime,
+            "created_at": datetime
         },
         "message": string
     }
