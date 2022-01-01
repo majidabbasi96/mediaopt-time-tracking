@@ -218,9 +218,22 @@ With this API you can get peack time of a project in a specific date which most 
 
 Register: `POST http://localhost/api/register`
 
+    {name: string, email: string, password: string, confirm_password: string}
+
 Login: `POST http://localhost/api/login`
 
-These two APIs will return token which you need to send as Bearer Token in the Authentication for next manage APIS.
+    {email: string, password: string}
+
+These two APIs will return the following result and you need to send the token as Bearer Token in the Authentication for next manage APIS.
+
+    {
+        "success": boolean.
+        "data": {
+            "token": string,
+            "name": string
+        },
+        "message": string
+    }
 
 #### Manage Worklogs
 
