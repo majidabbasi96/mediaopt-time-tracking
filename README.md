@@ -258,3 +258,29 @@ Get Details: `GET http://localhost/api/admin/projects/{id}`
 Update: `PUT http://localhost/api/admin/projects/{id}`
 
 DELETE: `DELETE http://localhost/api/admin/projects/{id}`
+
+
+### Project Important Files and Folders
+
+
+API Routes: `routes/api.php`
+
+API Controllers: `app/Http/Controllers/API/*.*`
+
+Models: `app/Models/*.*`
+
+CSV Importer Model: `app/Imports/ImportWorklog.php`
+
+Helper Functions: `app/helpers.php`
+
+Database Migrations: `database/migrations/*.*`
+
+Database Seeders: `database/seeders/*.*`
+
+Unit Tests: `tests/Unit/*.*`
+
+Feature Tests: `tests/Feautre/*.*`
+
+Docker Compose: `docker-compose.yml`
+
+README: `README.md`
