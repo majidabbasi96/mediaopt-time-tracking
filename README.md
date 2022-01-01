@@ -260,7 +260,7 @@ Update: `PUT http://localhost/api/admin/projects/{id}`
 DELETE: `DELETE http://localhost/api/admin/projects/{id}`
 
 
-### Project Important Files and Folders
+## Project Important Files and Folders
 
 
 API Routes: `routes/api.php`
