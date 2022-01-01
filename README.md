@@ -18,14 +18,14 @@ In this project I developed some RESTful APIs with Laravel and Docker in order t
 
 In order to run and install the project in your local machine, follow these instructions:
 
-- Download and install [Docker Descktop](https://www.docker.com/products/docker-desktop) in your local machine based on your OS (If you do not have it).
+Step 1: Download and install [Docker Descktop](https://www.docker.com/products/docker-desktop) in your local machine based on your OS (If you do not have it).
 
-- Clone the project from the Githup.
+Step 2: Clone the project from the Githup.
 
-- Run `cp .env.example .env` command.
+Step 3: Run `cp .env.example .env` command.
 This commany will create .env file from  .env.example in your local machine in order to be able to project.
 
-- Run the following command in order to install the composer packages without needing to install the the composer in your local machine:
+Step 4: Run the following command in order to install the composer packages without needing to install the the composer in your local machine:
 
     docker run --rm \
         -u "$(id -u):$(id -g)" \
@@ -36,23 +36,23 @@ This commany will create .env file from  .env.example in your local machine in o
 
 You can find refrence of this command on [Laravel Official Documentation](https://laravel.com/docs/8.x/sail#installing-composer-dependencies-for-existing-projects)
 
-- Run the following Command:
+Step 5: Run the following Command:
     ./vendor/bin/sail up
 This command will install the Laravel project dependencies based on `docker-compose.yml` file instructions in docker and run the app.
 
-- Run the following command:
+Step 6: Run the following command:
     ./vendor/bin/sail artisan key:generate
 This command will generate a key for Laravel project.
 
-- Run the following command:
+Step 7: Run the following command:
     ./vendor/bin/sail artisan migrate
 This command will run the database migrations on database instanceof docker.
 
-- Run the following command command:
+Step 8: Run the following command command:
     ./vendor/bin/sail artisan db:seed --class=ProjectSeeder
 This command will add some sample projects.
 
-- Run the following command:
+Step 9: Run the following command:
     ./vendor/bin/sail artisan db:seed --class=UserSeeder
 This command will add some sample users.
 
@@ -60,10 +60,12 @@ Open browser and then go to the `http://localhost/` , you should be able to see 
 
 
 ## Check the database on phpMyAdmin
+
 In order to see the database you need to go to the `http://localhost:8080/` and then login on phpMyAdmin with `username: root` and `password: `
 
 
 ## Run Unit and Features Tests
+
 In order to run unit and feaures tests please run following Sail commands:
 
     ./vendor/bin/sail artisan test
