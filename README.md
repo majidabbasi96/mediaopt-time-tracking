@@ -143,3 +143,29 @@ This this API you can log leaving work.
         },
         "message": string
     }
+
+### Worklog Bulk Upload
+
+With this API you can upload your reports as bulk.
+
+#### Request
+
+`POST http://localhost/api/work-logs/bulk-upload`
+
+    {file: File}
+
+Note: the columns in CSV file should be like this:
+
+    Column 1: user_id
+    Column 2: project_id
+    Column 3: record_date
+    Column 4: start_time
+    Column 5: end_time
+
+#### Response
+
+    {
+        "success": true,
+        "data": [],
+        "message": "data has been imported."
+    }
