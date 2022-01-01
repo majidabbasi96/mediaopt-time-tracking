@@ -217,6 +217,7 @@ With this API you can get peack time of a project in a specific date which most 
 #### Authentication and authorization
 
 Register: `POST http://localhost/api/register`
+
 Login: `POST http://localhost/api/login`
 
 These two APIs will return token which you need to send as Bearer Token in the Authentication for next manage APIS.
@@ -224,15 +225,23 @@ These two APIs will return token which you need to send as Bearer Token in the A
 #### Manage Worklogs
 
 Get List: `GET http://localhost/api/admin/work-logs`
+
 Add New: `POST http://localhost/api/admin/work-logs`
+
 Get Details: `GET http://localhost/api/admin/work-logs/{id}`
+
 Update: `PUT http://localhost/api/admin/work-logs/{id}`
+
 DELETE: `DELETE http://localhost/api/admin/work-logs/{id}`
 
 #### Manage Projects
 
 Get List: `GET http://localhost/api/admin/projects`
+
 Add New: `POST http://localhost/api/admin/projects`
+
 Get Details: `GET http://localhost/api/admin/projects/{id}`
+
 Update: `PUT http://localhost/api/admin/projects/{id}`
+
 DELETE: `DELETE http://localhost/api/admin/projects/{id}`
