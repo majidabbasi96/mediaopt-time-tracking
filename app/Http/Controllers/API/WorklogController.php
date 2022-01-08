@@ -359,7 +359,7 @@ class WorklogController extends BaseController
 
         //Get the peak time
         $peak_times = DB::table("worklogs as a")
-                        ->join("worklogs as b", "a.id", "!=" , "b.id")
+                        ->join("worklogs as b", [])
                         
                         ->select(DB::raw("concat(a.start_time, ' to ' , a.end_time) as overlap_time"), DB::raw("count(*) as record_count") )
                         
@@ -373,7 +373,10 @@ class WorklogController extends BaseController
                         ->where("a.end_time", "<=", DB::raw("b.end_time"))
 
                         ->orderBy("record_count", "desc")
+                        
                         ->groupBy("overlap_time")
+                        ->groupBy("a.id")
+
                         ->first();
 
         //Return data
