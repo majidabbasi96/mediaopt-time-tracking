@@ -206,8 +206,10 @@ With this API you can get peack time of a project in a specific date which most 
     {
         "success": boolean,
         "data": {
-            "overlap_time": time,
-            "record_count": int
+            "from": time,
+            "to": time,
+            "on": date,
+            "project": string
         },
         "message": string
     }

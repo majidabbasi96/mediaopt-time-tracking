@@ -356,12 +356,45 @@ class WorklogController extends BaseController
         if(!$project){
             return $this->sendError('Project is invalid', [], 400);
         }
+        $projectName = $project->name;
 
-        //Get the peak time
-        $peak_times = DB::table("worklogs as a")
+        //Calculate the start-time most of the employees worked on the given project and date
+        $startTimeRange = DB::table("worklogs as a")
                         ->join("worklogs as b", [])
                         
-                        ->select(DB::raw("concat(a.start_time, ' to ' , a.end_time) as overlap_time"), DB::raw("count(*) as record_count") )
+                        ->select(DB::raw("count(*) as row_count"), "a.start_time", "a.end_time" )
+                        
+                        ->where("a.record_date", "=", $recordDate)
+                        ->where("b.record_date", "=", $recordDate)
+
+                        ->where("a.project_id", "=", $projectId)
+                        ->where("b.project_id", "=", $projectId)
+                        
+                        ->whereBetween('a.start_time', [DB::raw("b.start_time"), DB::raw("b.end_time")])
+
+                        ->groupBy("a.start_time")
+                        ->groupBy("a.id")
+
+                        ->orderBy("row_count", "desc")
+                        ->orderBy("a.start_time", "asc")
+                        ->orderBy("a.end_time", "asc")
+
+                        ->first();
+
+        //Return error if the given date does not have any record
+        if(!$startTimeRange){
+            return $this->sendError('There is not any result', [], 400);
+        }
+
+        $fromTime = $startTimeRange->start_time;
+        //We take end-time in order to use in the the range of the end-date calculation
+        $startRangeEndTime = $startTimeRange->end_time;
+
+        //Calculate the end-time that most of the eemployees working on the given project and date and also is in the range of the start date 
+        $endTimeRange = DB::table("worklogs as a")
+                        ->join("worklogs as b", [])
+                        
+                        ->select(DB::raw("count(*) as row_count"), "a.end_time" )
                         
                         ->where("a.record_date", "=", $recordDate)
                         ->where("b.record_date", "=", $recordDate)
@@ -369,17 +402,24 @@ class WorklogController extends BaseController
                         ->where("a.project_id", "=", $projectId)
                         ->where("b.project_id", "=", $projectId)
 
-                        ->where("a.start_time", ">=", DB::raw("b.start_time"))
-                        ->where("a.end_time", "<=", DB::raw("b.end_time"))
-
-                        ->orderBy("record_count", "desc")
+                        ->where("a.end_time", ">", $fromTime)
+                        ->where("a.end_time", "<=", $startRangeEndTime)
                         
-                        ->groupBy("overlap_time")
+                        ->groupBy("a.end_time")
                         ->groupBy("a.id")
+
+                        ->orderBy("row_count", "desc")
+                        ->orderBy("a.end_time", "asc")
 
                         ->first();
 
-        //Return data
-        return $this->sendResponse($peak_times, 'Report has been calculated.');
+        $toTime = $endTimeRange->end_time;
+
+        //Create the result variable in order to return in the response
+        $result = ['from' => $fromTime, 'to' => $toTime, 'on' => $recordDate, 'project' => $projectName];
+
+        //Return result
+        $message_format = "The peak time on %s is from %s to %s on %s project.";
+        return $this->sendResponse($result, sprintf($message_format, $recordDate, $fromTime, $toTime, $projectName) );
     }
 }
